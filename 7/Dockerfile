@@ -1,4 +1,4 @@
-FROM ryohji/protobuf:7
+FROM ryohji/protobuf:gcc-7
 
 RUN apt-get update\
  && apt-get remove python-pip python3-pip\
