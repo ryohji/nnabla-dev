@@ -4,14 +4,19 @@ RUN echo "deb http://ftp.debian.org/debian jessie-backports main"\
  > /etc/apt/sources.list.d/jessie-backports.list\
  && apt-get update\
  && apt-get remove python-pip\
- && apt-get install --no-install-recommends libarchive13 libjsoncpp1 libuv1\
- && apt-get install --no-install-recommends cmake cmake-data\
- && apt-get install --no-install-recommends zip unzip\
- && apt-get install --no-install-recommends libarchive-dev\
  && apt-get install --no-install-recommends libpython2.7 libpython2.7-dev\
+ && apt-get install --no-install-recommends libarchive-dev libarchive13\
+ && apt-get install --no-install-recommends zip unzip\
  && apt-get upgrade -y\
  && apt-get clean\
  && rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/jessie-backports.list
+
 RUN wget https://bootstrap.pypa.io/get-pip.py\
  && python get-pip.py\
- && pip2 install cython==0.25 numpy\
+ && pip2 install cython==0.25 numpy
+
+ADD cmake-3.10.2.tar.gz /tmp
+RUN cd /tmp/cmake-3.10.2\
+ && ./configure --prefix=/usr\
+ && make install\
+ && rm -r /tmp/cmake-3.10.2
