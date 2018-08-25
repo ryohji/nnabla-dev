@@ -1,5 +1,11 @@
 FROM ryohji/protobuf:gcc-7
 
+ADD cmake-3.12.1.tar.gz /tmp
+RUN cd /tmp/cmake-3.12.1\
+ && ./configure --prefix=/usr\
+ && make install\
+ && rm -r /tmp/cmake-3.12.1
+
 RUN apt-get update\
  && apt-get remove python-pip python3-pip\
  && apt-get install --no-install-recommends libpython2.7 libpython2.7-dev\
@@ -15,9 +21,3 @@ RUN wget https://bootstrap.pypa.io/get-pip.py\
  && python3 get-pip.py\
  && pip2 install mako pyyaml\
  && pip3 install cython numpy six
-
-ADD cmake-3.12.1.tar.gz /tmp
-RUN cd /tmp/cmake-3.12.1\
- && ./configure --prefix=/usr\
- && make install\
- && rm -r /tmp/cmake-3.12.1
