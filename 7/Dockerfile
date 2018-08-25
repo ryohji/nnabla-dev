@@ -7,8 +7,7 @@ RUN cd /tmp/cmake-3.12.1\
  && rm -r /tmp/cmake-3.12.1
 
 RUN apt-get update\
- && apt-get remove python-pip python3-pip\
- && apt-get install --no-install-recommends libpython2.7 libpython2.7-dev\
+ && apt-get remove python3-pip\
  && apt-get install --no-install-recommends libpython3.5 libpython3.5-dev\
  && apt-get install --no-install-recommends libarchive-dev libarchive13\
  && apt-get install --no-install-recommends zip unzip\
@@ -17,7 +16,5 @@ RUN apt-get update\
  && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://bootstrap.pypa.io/get-pip.py\
- && python get-pip.py\
  && python3 get-pip.py\
- && pip2 install mako pyyaml\
- && pip3 install cython numpy six
+ && pip3 install cython mako numpy pyyaml six
